@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon | Game Programmer Portfolio</title>
+    <style>
+        /* ==============================
+           現代科技風 CSS 變數 & 基礎設定
+           ============================== */
+        :root {
+            --bg-color: #0d1117;
+            --container-bg: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-color: #00ffcc; /* 科技感青色 */
+            --accent-hover: #00cca3;
+            --border-color: #30363d;
+            --card-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            --font-mono: "Fira Code", Consolas, Monaco, monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 自定義捲軸 */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ==============================
+           導覽列 (Header & Nav)
+           ============================== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        .logo span { color: var(--text-primary); }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ==============================
+           區塊共用設定 (Sections)
+           ============================== */
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 2rem 60px;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 200px;
+            background-color: var(--border-color);
+            margin-left: 20px;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            margin-right: 10px;
+            font-weight: 400;
+        }
+
+        /* ==============================
+           00. 首頁 (Hero)
+           ============================== */
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 6rem); /* 讓名字更大更有氣勢 */
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #e6edf3;
+            letter-spacing: -2px;
+        }
+
+        /* 聯絡資訊專用樣式 */
+        .hero-contact {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .hero-contact a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .hero-contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==============================
+           01. 關於我 (About)
+           ============================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+        
+        .about-text strong {
+            color: var(--text-primary);
+        }
+
+        .skills-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .skill-tag {
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* ==============================
+           02. 專案展示 (Projects)
+           ============================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--card-shadow);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: #444;
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.9);
+        }
+
+        /* 專案圖片容器 (補回) */
+        .project-image-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project-image-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 255, 204, 0.05);
+            transition: background-color 0.3s;
+        }
+        
+        .project-card:hover .project-image-wrapper::after {
+            background-color: transparent;
+        }
+
+        .project-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .project-details {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .project-links {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .project-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .project-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* ==============================
+           頁尾 (Footer)
+           ============================== */
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            background-color: #0b0e13;
+        }
+
+        /* ==============================
+           響應式設計 (RWD)
+           ============================== */
+        @media (max-width: 768px) {
+            header { background: rgba(13, 17, 23, 0.95); }
+            nav { padding: 1rem; }
+            .nav-links { display: none; }
+            
+            section { padding: 80px 1.5rem 40px; }
+            .about-content { grid-template-columns: 1fr; gap: 30px; }
+            .section-title::after { width: 100px; }
+            
+            .projects-grid { grid-template-columns: 1fr; }
+            .project-image-wrapper { height: 180px; }
+            
+            /* 在手機版讓 Email 可以自動換行，避免撐破螢幕 */
+            .hero-contact { word-break: break-all; } 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">L<span>eon</span>_</a>
+            <div class="nav-links">
+                <a href="#about">01. About</a>
+                <a href="#projects">02. Projects</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h1 class="hero-title">Leon</h1>
+        <div class="hero-contact">Tel: +852 5112 3727</div>
+        <div class="hero-contact">Email: <a href="mailto:pncicg@gmail.com">pncicg@gmail.com</a></div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title"><span>01.</span>Game Projects</h2>
+        <div class="projects-grid">
+            
+            <a href="DownOfTheMachinePage.html">
+                <div class="project-card">
+                    <div class="project-image-wrapper">
+                        <img src="gifs/DownOfTheMachineCover.gif" alt="Down Of The Machine Cover">
+                    </div>
+                    <div class="project-details">
+                        <div>
+                            <h3 class="project-title">Down Of The Machine</h3>
+                            <p class="project-desc">
+                                Developed a real-time strategy game using Unity and C#
+                            </p>
+                        </div>
+                        <div class="project-links">
+                            <span>View Project ↗</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="CasinoNightPage.html">
+                <div class="project-card">
+                    <div class="project-image-wrapper">
+                        <img src="images/CasinoNightCover.png" alt="Casino Night Cover">
+                    </div>
+                    <div class="project-details">
+                        <div>
+                            <h3 class="project-title">Casino Night</h3>
+                            <p class="project-desc">
+                                Interactive casino simulator deployed for web platforms.
+                            </p>
+                        </div>
+                        <div class="project-links">
+                            <span>View Project ↗</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Designed & Built by Leon © 2026</p>
+    </footer>
+
+</body>
+</html>
