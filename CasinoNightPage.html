@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Detail | Leon Portfolio</title>
     <style>
-        /* 延續你的科技風色彩設定 */
         :root {
             --bg-color: #0d1117;
             --container-bg: #161b22;
@@ -26,7 +25,6 @@
             padding-bottom: 60px;
         }
 
-        /* 導覽列 */
         header {
             background: rgba(13, 17, 23, 0.85);
             backdrop-filter: blur(10px);
@@ -50,14 +48,12 @@
         }
         .back-link:hover { color: var(--accent-color); }
 
-        /* 主容器 */
         .container {
             max-width: 900px;
             margin: 120px auto 0;
             padding: 0 2rem;
         }
 
-        /* 專案標頭 */
         .project-header {
             margin-bottom: 2.5rem;
         }
@@ -74,21 +70,63 @@
             margin-top: 0.5rem;
         }
 
-        /* 頂部主視覺圖/影片 */
-        .main-media-wrapper {
+        .demo-gallery {
+            width: 100%;
+            margin-bottom: 2.5rem;
+        }
+
+        .main-preview {
             width: 100%;
             height: 450px;
             background-color: var(--container-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 8px 8px 0 0;
             overflow: hidden;
-            margin-bottom: 2.5rem;
         }
-        .main-media-wrapper img {
+        .main-preview img {
             width: 100%; height: 100%; object-fit: cover;
         }
+        .thumbnail-selector {
+            display: flex;
+            gap: 12px;
+            background-color: #0d1117; 
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 8px 8px; 
+            padding: 12px;
+            overflow-x: auto; 
+            white-space: nowrap;
+        }
+   
+        .thumbnail-selector::-webkit-scrollbar {
+            height: 5px;
+        }
+        .thumbnail-selector::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+    
+        .thumb {
+            width: 120px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+        .thumb:hover {
+            opacity: 0.8;
+        }
 
-        /* 專案基本資訊欄 */
+        .thumb.active {
+            opacity: 1;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.2);
+        }
+
         .project-meta-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -116,7 +154,6 @@
         }
         .meta-item a:hover { text-decoration: underline; }
 
-        /* 內文區塊 */
         .content-section {
             margin-bottom: 3rem;
         }
@@ -148,10 +185,10 @@
             color: var(--text-primary);
         }
 
-        /* 響應式設定 */
         @media (max-width: 768px) {
             .container { margin-top: 100px; }
-            .main-media-wrapper { height: 250px; }
+            .main-preview { height: 250px; }
+            .thumb { width: 90px; height: 55px; }
         }
     </style>
 </head>
@@ -159,19 +196,27 @@
 
     <header>
         <nav>
-            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            <a href="index.html" class="back-link">← Home</a>
         </nav>
     </header>
 
     <main class="container">
         
         <div class="project-header">
-            <h1 class="project-title">Casino Night</h1>
+            <h1 class="project-title">Casino Night_</h1>
             <p class="project-subtitle">Casino simulator</p>
         </div>
 
-        <div class="main-media-wrapper">
-            <img src="gifs/CasinoNightDemo.gif" alt="DownOfTheMachineDemo">
+        <div class="demo-gallery">
+            <div class="main-preview">
+                <img id="active-gif" src="gifs/CasinoNightDemo.gif" alt="Gameplay Demo">
+            </div>
+            
+            <div class="thumbnail-selector">
+                <img class="thumb active" src="gifs/CasinoNightDemo.gif" alt="Demo1" onclick="switchGif('gifs/CasinoNightDemo.gif', this)">
+                <img class="thumb" src="gifs/CasinoNightDemo1.gif" alt="Demo2" onclick="switchGif('gifs/CasinoNightDemo1.gif', this)">
+                <img class="thumb" src="gifs/CasinoNightDemo2.gif" alt="Demo3" onclick="switchGif('gifs/CasinoNightDemo2.gif', this)">
+            </div>
         </div>
 
         <div class="project-meta-grid">
@@ -210,6 +255,15 @@
         </div>
 
     </main>
+
+    <script>
+        function switchGif(gifSrc, clickedThumb) {
+            document.getElementById('active-gif').src = gifSrc;
+            const allThumbs = document.querySelectorAll('.thumb');
+            allThumbs.forEach(thumb => thumb.classList.remove('active'));
+            clickedThumb.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
