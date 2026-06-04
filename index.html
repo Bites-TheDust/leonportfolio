@@ -28,8 +28,23 @@
             box-sizing: border-box;
         }
 
-        /* 自定義捲軸 */
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        /* 💡 優化捲軸：不完全隱藏，而是做成精緻的細條 */
+        ::-webkit-scrollbar { 
+            width: 6px; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* 💡 全域超連結重設，防止專案卡片變色或出現底線 */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         body {
             font-family: var(--font-main);
@@ -67,7 +82,6 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent-color);
-            text-decoration: none;
             letter-spacing: -1px;
         }
         
@@ -75,7 +89,6 @@
 
         .nav-links a {
             color: var(--text-primary);
-            text-decoration: none;
             margin-left: 2rem;
             font-size: 0.85rem;
             font-family: var(--font-mono);
@@ -92,7 +105,7 @@
         section {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 100px 2rem 60px;
+            padding: 120px 2rem 60px; /* 稍微增加上方 padding 避免被 Fixed 導覽列遮擋 */
             min-height: 40vh;
             display: flex;
             flex-direction: column;
@@ -161,7 +174,6 @@
         
         .hero-contact a {
             color: var(--accent-color);
-            text-decoration: none;
             transition: color 0.3s ease;
         }
 
@@ -175,7 +187,6 @@
             justify-content: center;
             align-items: center;
             min-width: 250px;
-            transform: translateY(100px);
         }
 
         .hero-gif-container img {
@@ -190,7 +201,7 @@
         }
 
         /* ==============================
-           01. Projects
+           01. Projects & Certificates
            ============================== */
         .projects-grid {
             display: grid;
@@ -207,6 +218,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: var(--card-shadow);
+            height: 100%; /* 讓卡片高度等高 */
         }
 
         .project-card:hover {
@@ -273,15 +285,14 @@
             justify-content: flex-end;
         }
 
-        .project-links a {
+        .project-links span {
             color: var(--accent-color);
-            text-decoration: none;
             font-family: var(--font-mono);
             font-size: 0.85rem;
             transition: color 0.3s;
         }
 
-        .project-links a:hover {
+        .project-card:hover .project-links span {
             color: white;
             text-decoration: underline;
         }
@@ -307,8 +318,7 @@
             nav { padding: 1rem; }
             .nav-links { display: none; }
             
-            section { padding: 80px 1.5rem 40px; }
-            .about-content { grid-template-columns: 1fr; gap: 30px; }
+            section { padding: 100px 1.5rem 40px; }
             .section-title::after { width: 100px; }
             
             .projects-grid { grid-template-columns: 1fr; }
@@ -323,26 +333,26 @@
     <header>
         <nav>
             <div class="nav-links">
-                <a href="#about">00. About</a>
+                <a href="#hero">00. Home</a>
                 <a href="#projects">01. Game Projects</a>
+                <a href="#certificates">02. Certificates</a>
             </div>
         </nav>
     </header>
 
     <section id="hero">
         <div class="hero-container">
-        
             <div class="hero-content">
                 <h1 class="hero-title">Leon_</h1>
                 <div class="hero-contact">Tel: +852 5112 3727</div>
                 <div class="hero-contact">Email: <a href="mailto:pncicg@gmail.com">pncicg@gmail.com</a></div>
             </div>
 
-        <div class="hero-gif-container">
+            <div class="hero-gif-container">
                 <img src="gifs/Dinosaur.gif" alt="Dinosaur">
+            </div>
         </div>
-
-    </div></section>
+    </section>
 
     <section id="projects">
         <h2 class="section-title"><span>01.</span>Game Projects</h2>
@@ -357,7 +367,7 @@
                         <div>
                             <h3 class="project-title">Down Of The Machine</h3>
                             <p class="project-desc">
-                                Developed a real-time strategy game using Unity and C#
+                                Developed a real-time strategy game using Unity and C#.
                             </p>
                         </div>
                         <div class="project-links">
@@ -384,6 +394,32 @@
                         </div>
                     </div>
                 </div>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="certificates">
+        <h2 class="section-title"><span>02.</span>Certificates</h2>
+        <div class="projects-grid">
+
+            <a href="NvidiaCertificates.html">
+                <div class="project-card">
+                    <div class="project-image-wrapper">
+                        <img src="images/NVIDIAlogo.png" alt="NVIDIA logo">
+                    </div>
+                    <div class="project-details">
+                        <div>
+                            <h3 class="project-title">NVIDIA online course</h3>
+                            <p class="project-desc">
+                                I have done some free Nvidia online course in my spare time and have got their certification.
+                            </p>
+                        </div>
+                        <div class="project-links">
+                            <span>View Certificates ↗</span>
+                        </div>
+                    </div>
+                </div>    
             </a>
 
         </div>

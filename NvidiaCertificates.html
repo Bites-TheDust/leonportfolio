@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA Certificates | Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --container-bg: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-color: #76b900; 
+            --border-color: #30363d;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            --font-mono: "Fira Code", Consolas, Monaco, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--accent-color); }
+
+        .container {
+            max-width: 1100px;
+            margin: 120px auto 0;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: #e6edf3;
+            line-height: 1.2;
+        }
+        .page-subtitle {
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .cert-card {
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            height: 100%;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px -10px rgba(118, 185, 0, 0.15);
+        }
+
+        .cert-img-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #000;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cert-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0.85;
+        }
+
+        .cert-card:hover .cert-img-wrapper img {
+            transform: scale(1.03);
+            opacity: 1;
+        }
+
+        .cert-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cert-title {
+            font-size: 1.2rem;
+            color: #e6edf3;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .cert-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .cert-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .cert-links {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .cert-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .cert-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 14, 20, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 6px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            border: 1px solid var(--border-color);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .container { margin-top: 100px; }
+            .cert-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="back-link">← Back</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <div class="page-header">
+            <h1 class="page-title">NVIDIA Certifications_</h1>
+            <p class="page-subtitle">Deep Learning Institute & Online Academy</p>
+        </div>
+
+        <div class="cert-grid">
+            
+            <div class="cert-card">
+                <div class="cert-img-wrapper" onclick="openLightbox('images/AIonJN.png')">
+                    <img src="images/AIonJN.png" alt="NVIDIA Jetson Nano Course">
+                </div>
+                <div class="cert-info">
+                    <div>
+                        <h3 class="cert-title">Getting Started with AI on Jetson Nano</h3>
+                        <div class="cert-meta">Issued: June 2026</div>
+                        <p class="cert-desc">
+                            Learned about NVIDIA Jetson Nano, run inference on the NVIDIA Jetson Nano with the models.
+                        </p>
+                    </div>
+                    <div class="cert-links">
+                        <a href="pdfs/AIonJN.pdf" target="_blank">Verify PDF ↗</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-img-wrapper" onclick="openLightbox('images/NVIDIAlogo.png')">
+                    <img src="images/NVIDIAlogo.png" alt="NVIDIA Corporate Logo">
+                </div>
+                <div class="cert-info">
+                    <div>
+                        <h3 class="cert-title">More Courses Incoming...</h3>
+                        <div class="cert-meta">In Progress</div>
+                        <p class="cert-desc">
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Enlarged Certificate">
+    </div>
+
+    <script>
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+
+</body>
+</html>
