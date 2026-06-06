@@ -157,6 +157,7 @@
             font-family: var(--font-mono);
             font-size: 0.85rem;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .cert-links a:hover {
@@ -168,11 +169,10 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 14, 20, 0.95);
+            background: rgba(10, 14, 20, 0.96);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            cursor: zoom-out;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -182,8 +182,17 @@
             opacity: 1;
         }
 
-        .lightbox img {
+        .lightbox-content {
+            position: relative;
             max-width: 90%;
+            max-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 100%;
             max-height: 85vh;
             border-radius: 6px;
             box-shadow: 0 0 40px rgba(0,0,0,0.8);
@@ -192,13 +201,42 @@
             transition: transform 0.3s ease;
         }
 
-        .lightbox.active img {
+        .lightbox iframe {
+            width: 80vw;
+            height: 80vh;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #2a2f35; 
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        .lightbox.active img, .lightbox.active iframe {
             transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 25px; right: 30px;
+            color: var(--text-secondary);
+            font-size: 2.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            transition: color 0.3s, transform 0.2s;
+            z-index: 2100;
+            line-height: 1;
+        }
+        .lightbox-close:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
             .container { margin-top: 100px; }
             .cert-grid { grid-template-columns: 1fr; }
+            .lightbox iframe { width: 95vw; height: 75vh; }
+            .lightbox-close { top: 15px; right: 20px; font-size: 2rem; }
         }
     </style>
 </head>
@@ -220,34 +258,73 @@
         <div class="cert-grid">
             
             <div class="cert-card">
-                <div class="cert-img-wrapper" onclick="openLightbox('images/AIonJN.png')">
-                    <img src="images/AIonJN.png" alt="NVIDIA Jetson Nano Course">
+                <div class="cert-img-wrapper" onclick="openLightbox('images/AIonJN.png', 'img')">
+                    <img src="images/AIonJN.png" alt="Getting Started with AI on Jetson Nano">
                 </div>
                 <div class="cert-info">
                     <div>
                         <h3 class="cert-title">Getting Started with AI on Jetson Nano</h3>
                         <div class="cert-meta">Issued: June 2026</div>
                         <p class="cert-desc">
-                            Learned about NVIDIA Jetson Nano, run inference on the NVIDIA Jetson Nano with the models.
+                            Gained hands-on experience with the NVIDIA Jetson Nano developer kit. Successfully built and deployed end-to-end deep learning models for real-time computer vision inference.
                         </p>
                     </div>
                     <div class="cert-links">
-                        <a href="pdfs/AIonJN.pdf" target="_blank">Verify PDF ↗</a>
+                        <a onclick="openLightbox('pdfs/AIonJN.pdf', 'pdf')">Verify PDF ↗</a>
                     </div>
                 </div>
             </div>
 
             <div class="cert-card">
-                <div class="cert-img-wrapper" onclick="openLightbox('images/NVIDIAlogo.png')">
-                    <img src="images/NVIDIAlogo.png" alt="NVIDIA Corporate Logo">
+                <div class="cert-img-wrapper" onclick="openLightbox('images/IE.png', 'img')">
+                    <img src="images/IE.png" alt="InfiniBand Essentials">
                 </div>
                 <div class="cert-info">
                     <div>
-                        <h3 class="cert-title">More Courses Incoming...</h3>
-                        <div class="cert-meta">In Progress</div>
+                        <h3 class="cert-title">InfiniBand Essentials</h3>
+                        <div class="cert-meta">Issued: June 2026</div>
                         <p class="cert-desc">
-                            
+                            Mastered foundational high-performance computing (HPC) networking principles, covering InfiniBand architecture, subnet managers, RDMA technology, and cluster management.
                         </p>
+                    </div>
+                    <div class="cert-links">
+                        <a onclick="openLightbox('pdfs/IE.pdf', 'pdf')">Verify PDF ↗</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-img-wrapper" onclick="openLightbox('images/ITN.png', 'img')">
+                    <img src="images/ITN.png" alt="Introduction to Networking">
+                </div>
+                <div class="cert-info">
+                    <div>
+                        <h3 class="cert-title">Introduction to Networking</h3>
+                        <div class="cert-meta">Issued: June 2026</div>
+                        <p class="cert-desc">
+                            Explored core networking concepts essential for modern data centers, including the OSI model, TCP/IP protocol stack, link layer technologies, switching, and routing logic.
+                        </p>
+                    </div>
+                    <div class="cert-links">
+                        <a onclick="openLightbox('pdfs/ITN.pdf', 'pdf')">Verify PDF ↗</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-img-wrapper" onclick="openLightbox('images/CVTF.png', 'img')">
+                    <img src="images/CVTF.png" alt="Cable Validation Tool Fundamentals">
+                </div>
+                <div class="cert-info">
+                    <div>
+                        <h3 class="cert-title">Cable Validation Tool Fundamentals</h3>
+                        <div class="cert-meta">Issued: June 2026</div>
+                        <p class="cert-desc">
+                            Learned techniques for physical layer link validation using the NVIDIA CVT. Covered troubleshooting high-speed interconnects and optimizing link performance across enterprise fabrics.
+                        </p>
+                    </div>
+                    <div class="cert-links">
+                        <a onclick="openLightbox('pdfs/CVTF.pdf', 'pdf')">Verify PDF ↗</a>
                     </div>
                 </div>
             </div>
@@ -257,22 +334,47 @@
     </main>
 
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Enlarged Certificate">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Enlarged Certificate">
+            <iframe id="lightbox-pdf" src=""></iframe>
+        </div>
     </div>
 
     <script>
-        function openLightbox(imgSrc) {
+        function openLightbox(src, type) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxPdf = document.getElementById('lightbox-pdf');
             
-            lightboxImg.src = imgSrc;
+            if (type === 'pdf') {
+                lightboxImg.style.display = 'none';
+                lightboxImg.src = '';
+                
+                lightboxPdf.src = src;
+                lightboxPdf.style.display = 'block';
+            } else {
+                lightboxPdf.style.display = 'none';
+                lightboxPdf.src = '';
+                
+                lightboxImg.src = src;
+                lightboxImg.style.display = 'block';
+            }
+            
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden'; 
         }
 
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
+            const lightboxPdf = document.getElementById('lightbox-pdf');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
             lightbox.classList.remove('active');
+            
+            lightboxPdf.src = ''; 
+            lightboxImg.src = '';
+            
             document.body.style.overflow = 'auto';
         }
     </script>
