@@ -6,14 +6,14 @@
     <title>Leon | Portfolio</title>
     <style>
         /* ==============================
-           現代科技風 CSS 變數 & 基礎設定
+            CSS 
            ============================== */
         :root {
             --bg-color: #0d1117;
             --container-bg: #161b22;
             --text-primary: #c9d1d9;
             --text-secondary: #8b949e;
-            --accent-color: #00ffcc; /* 科技感青色 */
+            --accent-color: #00ffcc; 
             --accent-hover: #00cca3;
             --border-color: #30363d;
             --card-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
@@ -28,7 +28,6 @@
             box-sizing: border-box;
         }
 
-        /* 💡 優化捲軸：不完全隱藏，而是做成精緻的細條 */
         ::-webkit-scrollbar { 
             width: 6px; 
         }
@@ -40,7 +39,6 @@
             background: var(--text-secondary);
         }
 
-        /* 💡 全域超連結重設，防止專案卡片變色或出現底線 */
         a {
             text-decoration: none;
             color: inherit;
@@ -56,7 +54,7 @@
         }
 
         /* ==============================
-           導覽列 (Header & Nav)
+            Header & Nav
            ============================== */
         header {
             position: fixed;
@@ -100,12 +98,12 @@
         }
 
         /* ==============================
-           區塊共用設定 (Sections)
+            Sections
            ============================== */
         section {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 120px 2rem 60px; /* 稍微增加上方 padding 避免被 Fixed 導覽列遮擋 */
+            padding: 120px 2rem 60px; 
             min-height: 40vh;
             display: flex;
             flex-direction: column;
@@ -139,7 +137,7 @@
         }
 
         /* ==============================
-           00. Hero
+            Hero
            ============================== */
         .hero-container {
             display: flex;
@@ -218,7 +216,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: var(--card-shadow);
-            height: 100%; /* 讓卡片高度等高 */
+            height: 100%; 
         }
 
         .project-card:hover {
@@ -417,6 +415,25 @@
                         </div>
                         <div class="project-links">
                             <span>View Certificates ↗</span>
+                        </div>
+                    </div>
+                </div>    
+            </a>
+
+            <a href="GoogleCertificates.html">
+                <div class="project-card">
+                    <div class="project-image-wrapper">
+                        <img src="images/Googlelogo.png" alt="NVIDIA logo">
+                    </div>
+                    <div class="project-details">
+                        <div>
+                            <h3 class="project-title">Google online course</h3>
+                            <p class="project-desc">
+                                coming soon
+                            </p>
+                        </div>
+                        <div class="project-links">
+                            <span></span>
                         </div>
                     </div>
                 </div>    
